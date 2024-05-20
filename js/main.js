@@ -44,7 +44,10 @@ function permission () {
           // (optional) Do something after API prompt dismissed.
           if ( response == "granted" ) {
               window.addEventListener( "devicemotion", (e) => {
-                  alert("Got Permission");
+                  let acceleration = event.accelerationIncludingGravity;
+                  // Extract device's orientation data (e.g., pitch)
+                  let pitch = Math.atan2(acceleration.x, Math.sqrt(acceleration.y * acceleration.y + acceleration.z * acceleration.z));
+                  document.querySelector(".orientationTest").innerHTML = pitch;
               })
           }
       })
