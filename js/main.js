@@ -64,3 +64,7 @@ function permission () {
       alert( "DeviceMotionEvent is not defined" );
   }
 }
+
+function triggerNextWord() {
+  alert("next word");
+}
