@@ -54,6 +54,7 @@ function permission () {
                     waitingForTipUp = true;
                   } else if (Math.abs(pitch) > 1.1 && waitingForTipUp) {
                     triggerNextWord();
+                    waitingForTipUp = false;
                   }
               })
           }
