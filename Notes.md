@@ -1,0 +1,3 @@
+- Click to advance to next word
+- Display final score on recap page
+- Click to go from recap to settings page again
