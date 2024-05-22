@@ -75,11 +75,13 @@ function triggerNextWord() {
 }
 
 function displayNewWord() {
+  alert("test");
   let potentialNewWord = data.anything[Math.floor(Math.random() * data.anything.length)];
 
   while (usedWords.indexOf(potentialNewWord) >= 0) {
     potentialNewWord = data.anything[Math.floor(Math.random() * data.anything.length)];
   }
+  usedWords.push(potentialNewWord);
 
   document.querySelector(".word").innerHTML = potentialNewWord;
 }
