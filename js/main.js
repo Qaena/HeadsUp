@@ -5,7 +5,7 @@ var waitingForTipUp = false;
 var usedWords = [];
 
 if ( typeof( DeviceMotionEvent ) !== "undefined" && typeof( DeviceMotionEvent.requestPermission ) === "function") {
-  document.querySelector(".permissionPage").classList.remove("hidden");
+  document.querySelector(".permissions").classList.remove("hidden");
 }
 
 function startButton() {
@@ -13,8 +13,8 @@ function startButton() {
 
   document.querySelector(".timer").innerHTML = convertSecondsToText(secondsRemaining);
 
-  document.querySelector(".settingsPage").classList.add("hidden");
-  document.querySelector(".gamePage").classList.remove("hidden");
+  document.querySelector(".settings").classList.add("hidden");
+  document.querySelector(".game").classList.remove("hidden");
 
   intervalId = setInterval(secondTick, 1000);
 }
@@ -28,7 +28,8 @@ function secondTick() {
       document.querySelector(".cover").classList.add("hidden");
       displayNewWord();
     } else { //otherwise if it's the end of the game
-      document.querySelector(".cover").classList.remove("hidden");
+      document.querySelector(".recap").classList.remove("hidden");
+      document.querySelector(".game").classList.add("hidden");
       clearInterval(intervalId);
     }
   }
@@ -57,12 +58,14 @@ function permission () {
                 if (Math.abs(pitch) < 0.75) {
                   waitingForTipUp = true;
                 } else if (Math.abs(pitch) > 1.1 && waitingForTipUp) {
-                  triggerNextWord();
+                  if (!document.querySelector(".game").classList.contains("hidden")) {
+                    triggerNextWord();
+                  }
                   waitingForTipUp = false;
                 }
               })
 
-              document.querySelector(".permissionPage").classList.add("hidden");
+              document.querySelector(".permissions").classList.add("hidden");
           }
       })
           .catch( console.error )

@@ -20,43 +20,50 @@
 </head>
 
 <body>
-  <div class="permissionPage hidden">
+  <div class="permissions page hidden">
     <p>This requires access to the device motion events.</p>
     <button onclick="permission()">Request Permission</button>
   </div>
 
-  <div class="settingsPage">
+  <div class="settings page">
     <h1>Heads Up</h1>
     
-    <label for="category">Category:</label>
-    <select id="category" name="category">
-      <option value="anything" selected>Anything</option>
-      <option value="sports">Sports</option>
-      <option value="videoGames">Video Games</option>
-      <option value="celebrities">Celebrities</option>
-      <option value="movies">Movies</option>
-      <option value="history">History</option>
-      <option value="animals">Animals</option>
-      <option value="bibleBooks">Bible Books</option>
-      <option value="literature">Literature</option>
-      <option value="travel">Travel</option>
-    </select>
-    <label for="timeLimit">Time Limit:</label>
-      <select id="timeLimit" name="timeLimit">
-          <option value="30">0:30</option>
-          <option value="45">0:45</option>
-          <option value="60" selected>1:00</option>
-          <option value="75">1:15</option>
-          <option value="90">1:30</option>
+    <div class="">
+      <label for="category">Category:</label>
+      <select id="category" name="category">
+        <option value="anything" selected>Anything</option>
+        <option value="sports">Sports</option>
+        <option value="videoGames">Video Games</option>
+        <option value="celebrities">Celebrities</option>
+        <option value="movies">Movies</option>
+        <option value="history">History</option>
+        <option value="animals">Animals</option>
+        <option value="bibleBooks">Bible Books</option>
+        <option value="literature">Literature</option>
+        <option value="travel">Travel</option>
       </select>
-    <br/>
+      <label for="timeLimit">Time Limit:</label>
+        <select id="timeLimit" name="timeLimit">
+            <option value="30">0:30</option>
+            <option value="45">0:45</option>
+            <option value="60" selected>1:00</option>
+            <option value="75">1:15</option>
+            <option value="90">1:30</option>
+        </select>
+      <br/>
+    </div>
     <button onclick="startButton()">START</button>
   </div>
-  <div class="gamePage hidden">
+
+  <div class="game page hidden">
     <p class="timer">0:05</p>
     <div class="cover"></div>
     <p class="wordCount">0</p>
     <h1 class="word"></h1>
+  </div>
+
+  <div class="recap page hidden">
+    
   </div>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

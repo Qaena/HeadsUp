@@ -13,27 +13,24 @@ label {
   font-weight: bold;
 }
 
-.permissionPage {
+.permissions {
   z-index: 10;
-  background-color: azure;
-  flex-direction: column;
   display: flex;
-  position: absolute;
-  top: 0px;
-  left: 0px;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  flex-direction: column;
+  background-color: azure;
 }
 
-.cover {
+.page {
   width: 100%;
   height: 100%;
   display: block;
   position: absolute;
-  top: 0;
-  left: 0;
+  
+  top: 0px;
+  left: 0px;
+  
   background-color: darkgoldenrod;
 }
 
