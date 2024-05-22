@@ -4,7 +4,7 @@ var intervalId;
 var waitingForTipUp = false;
 var usedWords = [];
 
-if ( typeof( DeviceMotionEvent ) !== "undefined") {
+if ( typeof( DeviceMotionEvent ) !== "undefined" && typeof( DeviceMotionEvent.requestPermission ) === "function") {
   document.querySelector(".permissionPage").classList.remove("hidden");
 }
 
