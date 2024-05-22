@@ -4,6 +4,10 @@ var intervalId;
 var waitingForTipUp = false;
 var usedWords = [];
 
+if ( typeof( DeviceMotionEvent ) !== "undefined") {
+  document.querySelector(".permissionPage").classList.remove("hidden");
+}
+
 function startButton() {
   secondsRemaining = 5;
 
@@ -62,8 +66,6 @@ function permission () {
           }
       })
           .catch( console.error )
-  } else {
-      document.querySelector(".permissionPage").classList.add("hidden");
   }
 }
 
