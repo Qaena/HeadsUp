@@ -4,8 +4,20 @@ var intervalId;
 var waitingForTipUp = false;
 var usedWords = [];
 
-if ( typeof( DeviceMotionEvent ) !== "undefined" && typeof( DeviceMotionEvent.requestPermission ) === "function") {
-  document.querySelector(".permissions").classList.remove("hidden");
+init();
+
+function init() {
+  if ( typeof( DeviceMotionEvent ) !== "undefined" && typeof( DeviceMotionEvent.requestPermission ) === "function") {
+    document.querySelector(".permissions").classList.remove("hidden");
+  }
+
+  document.querySelector(".game").addEventListener("mousedown", () => {
+    triggerNextWord();
+  });
+  document.querySelector(".game").addEventListener("touchstart", (event) => {
+    event.preventDefault(); 
+    triggerNextWord();
+  });
 }
 
 function startButton() {

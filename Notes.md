@@ -1,3 +1,4 @@
 - Click to advance to next word
+- Click to cancel run
 - Display final score on recap page
 - Click to go from recap to settings page again
