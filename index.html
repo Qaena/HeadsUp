@@ -50,7 +50,7 @@
         </select>
       <br/>
     </div>
-    <button onclick="startButton()">START</button>
+    <button class="startButton">START</button>
   </div>
 
   <div class="game page hidden">
@@ -58,10 +58,13 @@
     <div class="cover"></div>
     <p class="wordCount">0</p>
     <h1 class="word"></h1>
+    <p class="cancelButton">Cancel Round</p>
   </div>
 
   <div class="recap page hidden">
-    
+    <h1>Recap</h1>
+    <p><span>You successfully guessed </span><span class="recapWordCount">0</span><span> words.</span></p>
+    <p>Click anywhere to continue.</p>
   </div>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

@@ -18,15 +18,38 @@ function init() {
     event.preventDefault(); 
     triggerNextWord();
   });
+
+  document.querySelector(".recap").addEventListener("mousedown", () => {
+    navigate("settings");
+  });
+  document.querySelector(".recap").addEventListener("touchstart", (event) => {
+    event.preventDefault(); 
+    navigate("settings");
+  });
+
+  document.querySelector(".cancelButton").addEventListener("mousedown", () => {
+    cancelRound();
+  });
+  document.querySelector(".cancelButton").addEventListener("touchstart", (event) => {
+    event.preventDefault(); 
+    cancelRound();
+  });
+
+  document.querySelector(".startButton").addEventListener("mousedown", () => {
+    startRound();
+  });
+  document.querySelector(".startButton").addEventListener("touchstart", (event) => {
+    event.preventDefault(); 
+    startRound();
+  });
 }
 
-function startButton() {
+function startRound() {
   secondsRemaining = 5;
 
   document.querySelector(".timer").innerHTML = convertSecondsToText(secondsRemaining);
 
-  document.querySelector(".settings").classList.add("hidden");
-  document.querySelector(".game").classList.remove("hidden");
+  navigate("game");
 
   intervalId = setInterval(secondTick, 1000);
 }
@@ -40,8 +63,7 @@ function secondTick() {
       document.querySelector(".cover").classList.add("hidden");
       displayNewWord();
     } else { //otherwise if it's the end of the game
-      document.querySelector(".recap").classList.remove("hidden");
-      document.querySelector(".game").classList.add("hidden");
+      navigate("recap");
       clearInterval(intervalId);
     }
   }
@@ -99,4 +121,14 @@ function displayNewWord() {
   usedWords.push(potentialNewWord);
 
   document.querySelector(".word").innerHTML = potentialNewWord;
+}
+
+function cancelRound() {
+  navigate("settings");
+  clearInterval(intervalId);
+}
+
+function navigate(page) {
+  document.querySelectorAll(".page").forEach((pageEl) => pageEl.classList.add("hidden"));
+  document.querySelector("." + page).classList.remove("hidden");
 }
