@@ -24,33 +24,56 @@
   </div>
 
   <div class="settings page">
-    <h1>Heads Up</h1>
+    <h1>Heads Up!</h1>
     
-    <div class="">
-      <label for="category">Category:</label>
-      <select id="category" name="category">
-        <option value="anything" selected>Anything</option>
-        <option value="sports">Sports</option>
-        <option value="videoGames">Video Games</option>
-        <option value="celebrities">Celebrities</option>
-        <option value="movies">Movies</option>
-        <option value="history">History</option>
-        <option value="animals">Animals</option>
-        <option value="bibleBooks">Bible Books</option>
-        <option value="literature">Literature</option>
-        <option value="travel">Travel</option>
-      </select>
-      <label for="timeLimit">Time Limit:</label>
-        <select id="timeLimit" name="timeLimit">
+    <div class="options">
+      <div class="optionPair">
+        <label for="category">Category</label>
+        <div class="buttonArray">
+          <div class="button blue buttonArrayOption selected">Anything</div>
+          <div class="button blue buttonArrayOption">Bible Books</div>
+        </div>
+        <!-- <div id="timeLimit" class="slider">
+          <div class="slide">Anything</div>
+
+        </div> -->
+        <!-- <select id="category" name="category">
+          <option value="anything" selected>Anything</option>
+          <option value="sports">Sports</option>
+          <option value="videoGames">Video Games</option>
+          <option value="celebrities">Celebrities</option>
+          <option value="movies">Movies</option>
+          <option value="history">History</option>
+          <option value="animals">Animals</option>
+          <option value="bibleBooks">Bible Books</option>
+          <option value="literature">Literature</option>
+          <option value="travel">Travel</option>
+        </select> -->
+      </div>
+      <div class="optionPair">
+        <label for="timeLimit">Time Limit</label>
+        <div class="adjuster">
+          <div class="minus button orange">-</div>
+          <div class="timeLimit" value="60">1:00</div>
+          <div class="plus button orange">+</div>
+        </div>
+        <!-- <div id="timeLimit" class="slider">
+          <div class="slide">0:30</div>
+          <div class="slide">0:45</div>
+          <div class="slide">1:00</div>
+          <div class="slide">1:15</div>
+          <div class="slide">1:30</div>
+        </div> -->
+        <!-- <select id="timeLimit" name="timeLimit">
             <option value="30">0:30</option>
             <option value="45">0:45</option>
             <option value="60" selected>1:00</option>
             <option value="75">1:15</option>
             <option value="90">1:30</option>
-        </select>
-      <br/>
+        </select> -->
+      </div>
     </div>
-    <button class="startButton">START</button>
+    <div class="button green startButton">START</div>
   </div>
 
   <div class="game page hidden">
