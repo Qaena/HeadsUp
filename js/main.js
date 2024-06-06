@@ -3,6 +3,7 @@ var wordsGuessed = 0;
 var intervalId;
 var waitingForTipUp = false;
 var usedWords = [];
+var globalCategory = "anything";
 
 init();
 
@@ -11,36 +12,62 @@ function init() {
     document.querySelector(".permissions").classList.remove("hidden");
   }
 
-  document.querySelector(".game").addEventListener("mousedown", () => {
+  document.querySelector(".game").addEventListener("mouseup", () => {
     triggerNextWord();
   });
-  document.querySelector(".game").addEventListener("touchstart", (event) => {
+  document.querySelector(".game").addEventListener("touchend", (event) => {
     event.preventDefault(); 
     triggerNextWord();
   });
 
-  document.querySelector(".recap").addEventListener("mousedown", () => {
+  document.querySelector(".recap").addEventListener("mouseup", () => {
     navigate("settings");
   });
-  document.querySelector(".recap").addEventListener("touchstart", (event) => {
+  document.querySelector(".recap").addEventListener("touchend", (event) => {
     event.preventDefault(); 
     navigate("settings");
   });
 
-  document.querySelector(".cancelButton").addEventListener("mousedown", () => {
+  document.querySelector(".cancelButton").addEventListener("mouseup", () => {
     cancelRound();
   });
-  document.querySelector(".cancelButton").addEventListener("touchstart", (event) => {
+  document.querySelector(".cancelButton").addEventListener("touchend", (event) => {
     event.preventDefault(); 
     cancelRound();
   });
 
-  document.querySelector(".startButton").addEventListener("mousedown", () => {
+  document.querySelector(".startButton").addEventListener("mouseup", () => {
     startRound();
   });
-  document.querySelector(".startButton").addEventListener("touchstart", (event) => {
+  document.querySelector(".startButton").addEventListener("touchend", (event) => {
     event.preventDefault(); 
     startRound();
+  });
+
+  document.querySelector(".minus").addEventListener("mouseup", () => {
+    modifyTime(-15);
+  });
+  document.querySelector(".minus").addEventListener("touchend", (event) => {
+    event.preventDefault(); 
+    modifyTime(-15);
+  });
+
+  document.querySelector(".plus").addEventListener("mouseup", () => {
+    modifyTime(15);
+  });
+  document.querySelector(".plus").addEventListener("touchend", (event) => {
+    event.preventDefault(); 
+    modifyTime(15);
+  });
+
+  document.querySelectorAll(".buttonArrayOption").forEach(el => {
+    el.addEventListener("mouseup", () => {
+      selectCategory(el.getAttribute("value"));
+    });
+    el.addEventListener("touchend", (event) => {
+      event.preventDefault(); 
+      selectCategory(el.getAttribute("value"));
+    });
   });
 }
 
@@ -48,6 +75,7 @@ function startRound() {
   secondsRemaining = 5;
 
   document.querySelector(".timer").innerHTML = convertSecondsToText(secondsRemaining);
+  globalCategory = document.querySelector(".buttonArrayOption.selected").getAttribute("value");
 
   navigate("game");
 
@@ -59,9 +87,9 @@ function secondTick() {
 
   if (secondsRemaining == 0) {
     if (!document.querySelector(".cover").classList.contains("hidden")) { //if this is the beginning of the game cover
-      secondsRemaining = document.querySelector("#timeLimit").value;
+      secondsRemaining = parseInt(document.querySelector(".timeLimit").getAttribute("value"));
       document.querySelector(".cover").classList.add("hidden");
-      displayNewWord();
+      displayNewWord(globalCategory);
     } else { //otherwise if it's the end of the game
       navigate("recap");
       clearInterval(intervalId);
@@ -69,6 +97,20 @@ function secondTick() {
   }
 
   document.querySelector(".timer").innerHTML = convertSecondsToText(secondsRemaining);
+}
+
+function modifyTime(seconds) {
+  const minTime = 30;
+  const maxTime = 90;
+
+  let timeLimitEl = document.querySelector(".timeLimit");
+  let newSeconds = parseInt(timeLimitEl.getAttribute("value")) + seconds;
+
+  newSeconds = Math.min(newSeconds, maxTime);
+  newSeconds = Math.max(newSeconds, minTime);
+
+  timeLimitEl.innerHTML = convertSecondsToText(newSeconds);
+  timeLimitEl.setAttribute("value",newSeconds);
 }
 
 function convertSecondsToText(seconds) {
@@ -109,14 +151,14 @@ function permission () {
 function triggerNextWord() {
   wordsGuessed++;
   document.querySelector(".wordCount").innerHTML = wordsGuessed;
-  displayNewWord();
+  displayNewWord(globalCategory);
 }
 
-function displayNewWord() {
-  let potentialNewWord = data.anything[Math.floor(Math.random() * data.anything.length)];
+function displayNewWord(category) {
+  let potentialNewWord = data[category][Math.floor(Math.random() * data[category].length)];
 
   while (usedWords.indexOf(potentialNewWord) >= 0) {
-    potentialNewWord = data.anything[Math.floor(Math.random() * data.anything.length)];
+    potentialNewWord = data[category][Math.floor(Math.random() * data[category].length)];
   }
   usedWords.push(potentialNewWord);
 
@@ -131,4 +173,12 @@ function cancelRound() {
 function navigate(page) {
   document.querySelectorAll(".page").forEach((pageEl) => pageEl.classList.add("hidden"));
   document.querySelector("." + page).classList.remove("hidden");
+}
+
+function selectCategory(dataCategory) {
+  document.querySelectorAll(".buttonArrayOption").forEach(el => {
+    el.classList.remove("selected");
+  });
+
+  document.querySelector(".buttonArrayOption[value=\"" + dataCategory + "\"]").classList.add("selected");
 }
