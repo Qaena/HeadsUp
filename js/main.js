@@ -9,9 +9,10 @@ init();
 
 function init() {
   if ( typeof( DeviceMotionEvent ) !== "undefined" && typeof( DeviceMotionEvent.requestPermission ) === "function") {
-    document.querySelector(".permissions").classList.remove("hidden");
+    navigate("permissions");
   }
 
+  addEvent(".requestPermission", permission);
   addEvent(".game", triggerNextWord);
   addEvent(".recap", () => navigate("settings"));
   addEvent(".cancelButton", cancelRound);
@@ -101,7 +102,7 @@ function convertSecondsToText(seconds) {
   return remainingSeconds < 10 ? minutes + ":0" + remainingSeconds : minutes + ":" + remainingSeconds;
 }
 
-function permission () {
+function permission() {
   if ( typeof( DeviceMotionEvent ) !== "undefined" && typeof( DeviceMotionEvent.requestPermission ) === "function" ) {
       DeviceMotionEvent.requestPermission()
           .then( response => {

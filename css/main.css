@@ -64,7 +64,7 @@ label {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: azure;
+  font-size: 15pt;
 }
 
 .pregame {
@@ -153,6 +153,12 @@ label {
   justify-content: center;
   background-color: rgb(90, 0, 0);
   opacity: 0.5;
+}
+
+.requestPermission {
+  font-size: 20pt;
+  padding: 10px 20px;
+  margin-top: 20px;
 }
 
 .green {
