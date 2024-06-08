@@ -122,12 +122,12 @@ function permission() {
                   waitingForTipUp = false;
                 }
               })
-
-              document.querySelector(".permissions").classList.add("hidden");
           }
       })
           .catch( console.error )
   }
+
+  navigate("settings");
 }
 
 function triggerNextWord() {
