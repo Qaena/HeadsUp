@@ -12,53 +12,12 @@ function init() {
     document.querySelector(".permissions").classList.remove("hidden");
   }
 
-  document.querySelector(".game").addEventListener("mouseup", () => {
-    triggerNextWord();
-  });
-  document.querySelector(".game").addEventListener("touchend", (event) => {
-    event.preventDefault(); 
-    triggerNextWord();
-  });
-
-  document.querySelector(".recap").addEventListener("mouseup", () => {
-    navigate("settings");
-  });
-  document.querySelector(".recap").addEventListener("touchend", (event) => {
-    event.preventDefault(); 
-    navigate("settings");
-  });
-
-  document.querySelector(".cancelButton").addEventListener("mouseup", () => {
-    cancelRound();
-  });
-  document.querySelector(".cancelButton").addEventListener("touchend", (event) => {
-    event.preventDefault(); 
-    cancelRound();
-  });
-
-  document.querySelector(".startButton").addEventListener("mouseup", () => {
-    startRound();
-  });
-  document.querySelector(".startButton").addEventListener("touchend", (event) => {
-    event.preventDefault(); 
-    startRound();
-  });
-
-  document.querySelector(".minus").addEventListener("mouseup", () => {
-    modifyTime(-15);
-  });
-  document.querySelector(".minus").addEventListener("touchend", (event) => {
-    event.preventDefault(); 
-    modifyTime(-15);
-  });
-
-  document.querySelector(".plus").addEventListener("mouseup", () => {
-    modifyTime(15);
-  });
-  document.querySelector(".plus").addEventListener("touchend", (event) => {
-    event.preventDefault(); 
-    modifyTime(15);
-  });
+  addEvent(".game", triggerNextWord);
+  addEvent(".recap", () => navigate("settings"));
+  addEvent(".cancelButton", cancelRound);
+  addEvent(".startButton", startRound);
+  addEvent(".minus", () => modifyTime(-15));
+  addEvent(".plus", () => modifyTime(15));
 
   document.querySelectorAll(".buttonArrayOption").forEach(el => {
     el.addEventListener("mouseup", () => {
@@ -71,29 +30,51 @@ function init() {
   });
 }
 
-function startRound() {
-  secondsRemaining = 5;
-
-  document.querySelector(".timer").innerHTML = convertSecondsToText(secondsRemaining);
-  globalCategory = document.querySelector(".buttonArrayOption.selected").getAttribute("value");
-
-  navigate("game");
-
-  intervalId = setInterval(secondTick, 1000);
+function addEvent(classname, fn) {
+  document.querySelectorAll(classname).forEach(el => {
+    el.addEventListener("mouseup", fn);
+    el.addEventListener("touchend", (event) => {
+      event.preventDefault(); 
+      fn();
+    });
+  });
 }
 
-function secondTick() {
+function startRound() {
+  secondsRemaining = 5;
+  wordsGuessed = 0;
+
+  document.querySelector(".wordCount").innerHTML = wordsGuessed;
+  document.querySelector(".countdown").innerHTML = secondsRemaining;
+  globalCategory = document.querySelector(".buttonArrayOption.selected").getAttribute("value");
+
+  navigate("pregame");
+
+  intervalId = setInterval(pregameTick, 1000);
+}
+
+function pregameTick() {
   secondsRemaining--;
 
   if (secondsRemaining == 0) {
-    if (!document.querySelector(".cover").classList.contains("hidden")) { //if this is the beginning of the game cover
-      secondsRemaining = parseInt(document.querySelector(".timeLimit").getAttribute("value"));
-      document.querySelector(".cover").classList.add("hidden");
-      displayNewWord(globalCategory);
-    } else { //otherwise if it's the end of the game
-      navigate("recap");
-      clearInterval(intervalId);
-    }
+    secondsRemaining = 10;//parseInt(document.querySelector(".timeLimit").getAttribute("value"));
+    document.querySelector(".timer").innerHTML = convertSecondsToText(secondsRemaining);
+    displayNewWord(globalCategory);
+    clearInterval(intervalId);
+    intervalId = setInterval(gameTick, 1000);
+    navigate("game");
+  }
+
+  document.querySelector(".countdown").innerHTML = secondsRemaining;
+}
+
+function gameTick() {
+  secondsRemaining--;
+
+  if (secondsRemaining == 0) {
+    clearInterval(intervalId);
+    document.querySelector(".recapWordCount").innerHTML = wordsGuessed;
+    navigate("recap");
   }
 
   document.querySelector(".timer").innerHTML = convertSecondsToText(secondsRemaining);
@@ -166,8 +147,8 @@ function displayNewWord(category) {
 }
 
 function cancelRound() {
-  navigate("settings");
   clearInterval(intervalId);
+  navigate("settings");
 }
 
 function navigate(page) {

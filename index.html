@@ -33,22 +33,6 @@
           <div class="button blue buttonArrayOption selected" value="anything">Anything</div>
           <div class="button blue buttonArrayOption" value="bibleBooks">Bible Books</div>
         </div>
-        <!-- <div id="timeLimit" class="slider">
-          <div class="slide">Anything</div>
-
-        </div> -->
-        <!-- <select id="category" name="category">
-          <option value="anything" selected>Anything</option>
-          <option value="sports">Sports</option>
-          <option value="videoGames">Video Games</option>
-          <option value="celebrities">Celebrities</option>
-          <option value="movies">Movies</option>
-          <option value="history">History</option>
-          <option value="animals">Animals</option>
-          <option value="bibleBooks">Bible Books</option>
-          <option value="literature">Literature</option>
-          <option value="travel">Travel</option>
-        </select> -->
       </div>
       <div class="optionPair">
         <label for="timeLimit">Time Limit</label>
@@ -57,36 +41,28 @@
           <div class="timeLimit" value="60">1:00</div>
           <div class="plus button orange">+</div>
         </div>
-        <!-- <div id="timeLimit" class="slider">
-          <div class="slide">0:30</div>
-          <div class="slide">0:45</div>
-          <div class="slide">1:00</div>
-          <div class="slide">1:15</div>
-          <div class="slide">1:30</div>
-        </div> -->
-        <!-- <select id="timeLimit" name="timeLimit">
-            <option value="30">0:30</option>
-            <option value="45">0:45</option>
-            <option value="60" selected>1:00</option>
-            <option value="75">1:15</option>
-            <option value="90">1:30</option>
-        </select> -->
       </div>
     </div>
     <div class="button green startButton">START</div>
   </div>
 
+  <div class="pregame page hidden">
+    <p class="countdownText">Round begins in: <span class="countdown">5</span></p>
+    <p class="cancelButton">Cancel Round</p>
+  </div>
+
   <div class="game page hidden">
-    <p class="timer">0:05</p>
-    <div class="cover"></div>
-    <p class="wordCount">0</p>
+    <div class="topbar">
+      <p class="guessed">Guessed: <span class="wordCount">0</span></p>
+      <p class="timer">0:05</p>
+    </div>
     <h1 class="word"></h1>
     <p class="cancelButton">Cancel Round</p>
   </div>
 
   <div class="recap page hidden">
     <h1>Recap</h1>
-    <p><span>You successfully guessed </span><span class="recapWordCount">0</span><span> words.</span></p>
+    <p class="recapText"><span><span class="recapWordCount">0</span><span> words successfully guessed!</span></p>
     <p>Click anywhere to continue.</p>
   </div>
   <script src="js/data.js"></script>
